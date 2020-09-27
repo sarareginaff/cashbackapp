@@ -9,7 +9,9 @@ setup(
     install_requires=[
         'flask',
         'redis',
-        'PyJWT'
+        'PyJWT',
+        'pandas',
+        'requests'
     ],
 )
 

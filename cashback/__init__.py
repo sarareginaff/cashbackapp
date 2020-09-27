@@ -24,4 +24,7 @@ def create_app(test_config=None):
     from .views import auth_route
     app.register_blueprint(auth_route.bp)
     
+    from .views import purchase_route
+    app.register_blueprint(purchase_route.bp)
+    
     return app

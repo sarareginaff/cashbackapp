@@ -9,7 +9,6 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from cashback.db.db import get_db
-from cashback.models import auth_model
 
 from cashback.views import helper 
 
@@ -65,7 +64,7 @@ def login():
         ).fetchone()
 
         if user is None:
-            return jsonify({'Nao foi possivel encontrar usuario com este CPF.'}), 401
+            return jsonify({'message': 'Nao foi possivel encontrar usuario com este CPF.'}), 401
         elif not check_password_hash(user['password'], password):
             error = ''
             return jsonify({'message': 'Senha incorreta.'}), 401

@@ -15,11 +15,14 @@ CREATE TABLE purchase_status (
   status_desc   TEXT    NOT NULL
 );
 
+INSERT INTO purchase_status VALUES (1, "Approved");
+INSERT INTO purchase_status VALUES (2, "Validation");
+
 CREATE TABLE purchases (
   id            INTEGER         PRIMARY KEY AUTOINCREMENT,
   code          TEXT            NOT NULL,
   value         INTEGER         NOT NULL,
-  dth_purchase  TIMESTAMP       NOT NULL,
+  dth_purchase  TEXT            NOT NULL,
   id_user       INTEGER         NOT NULL,
   id_status     INTEGER         NOT NULL,
 
