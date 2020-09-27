@@ -1,0 +1,2 @@
+include cashback/db/schema.sql
+global-exclude *.pyc
