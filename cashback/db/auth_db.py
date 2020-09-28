@@ -82,11 +82,15 @@ def get_not_allowed_tokens():
     r = redis.StrictRedis(host=app.config['REDIS_HOST'], 
                             port=app.config['REDIS_PORT'],
                             decode_responses=True)
-                            
-    not_allowed_tokens = list(r.get('not_allowed_tokens'))
+
+    not_allowed_tokens_str = r.get('not_allowed_tokens')
+    if not_allowed_tokens_str: 
+        not_allowed_tokens = list(json.loads(not_allowed_tokens_str))
+    else:
+        not_allowed_tokens = []
     
     r.connection_pool.disconnect()
-    
+
     return not_allowed_tokens
 
     
@@ -103,7 +107,7 @@ def update_not_allowed_tokens(not_allowed_tokens):
     r = redis.StrictRedis(host=app.config['REDIS_HOST'], 
                             port=app.config['REDIS_PORT'],
                             decode_responses=True)
-    
+
     r.set('not_allowed_tokens', json.dumps(not_allowed_tokens))
     
     r.connection_pool.disconnect()

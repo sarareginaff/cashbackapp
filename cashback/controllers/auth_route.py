@@ -77,7 +77,7 @@ def login():
         user = auth_db.get_user_by_cpf(cpf)
         
         if user is None or not check_password_hash(user['password'], password):
-            return jsonify({'message': 'CPF não encontrado ou senha incorreta.'}), 401
+            return jsonify({'message': 'CPF nao encontrado ou senha incorreta.'}), 401
     
         token, expire_date = auth_model.encode_token(cpf)
         

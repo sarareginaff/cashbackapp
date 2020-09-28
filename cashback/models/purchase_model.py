@@ -18,7 +18,7 @@ def define_purchase_status(cpf):
     """
     status = "Validation"
     
-    if(cpf in list(app.config['APPROVED_CPFS'])):
+    if(cpf in app.config['APPROVED_CPFS'].split(',')):
         status = "Approved"
     
     return status
@@ -47,6 +47,11 @@ def validate_purchase_register(code, value, dth_purchase, cpf):
         error += 'Valor da compra eh necessario. '
     if not dth_purchase:
         error += 'Data da compra eh necessaria. '
+    else:
+        try:
+            get_month(dth_purchase)
+        except:
+            error += 'Data nao esta no formato %Y-%m-%d %H:%M:%S.'
     if not cpf:
         error += 'CPF do revendedor ou da revendedora eh necessaria. '
         

@@ -100,8 +100,8 @@ def get_accumulated_cashback(current_user):
         
         :Returns: 
             - message (string): If there is some error
-            - cpf (string): CPF of user
-            - value (number): Accumulated cashbacks
+            - status (number): http status code
+            - body/credit (number): Accumulated cashbacks
 
         :author: sarareginaff       
         :creation: Sep/2020
