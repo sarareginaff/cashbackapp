@@ -47,7 +47,8 @@ def get_value_by_percentage(value, percentage):
 
 def calculate_cashback(purchases):
     # Convert to do dataframe
-    df = DataFrame(purchases, columns=['Code', 'Value', 'Dth_purchase', 'Cpf', 'Status'])
+    df = DataFrame(purchases, 
+                    columns=['Code', 'Value', 'Dth_purchase', 'Cpf', 'Status'])
 
     # Group data by cpf and month
     df['Month'] = df['Dth_purchase'].map(get_month)

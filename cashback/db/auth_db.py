@@ -10,7 +10,17 @@ def get_user_by_cpf(cpf):
     db = get_db()
     
     user = db.execute(
-        'SELECT id, full_name, cpf, email, password FROM users WHERE cpf = ?', (cpf,)
+        '''SELECT 
+            id, 
+            full_name, 
+            cpf, 
+            email, 
+            password 
+        FROM 
+            users 
+        WHERE 
+            cpf = ?'''
+        , (cpf,)
     ).fetchone()
             
     return user
@@ -20,7 +30,15 @@ def insert_new_user(full_name, cpf, email, password):
     db = get_db()
     
     db.execute(
-        'INSERT INTO users (full_name, cpf, email, password) VALUES (?, ?, ?, ?)',
+        '''INSERT INTO 
+            users 
+        (
+            full_name, 
+            cpf, 
+            email, 
+            password
+        ) 
+        VALUES (?, ?, ?, ?)''',
         (full_name, cpf, email, generate_password_hash(password),)
     )
     

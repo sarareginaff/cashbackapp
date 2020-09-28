@@ -23,7 +23,8 @@ def register(current_user):
         if error != '':
             return jsonify({'message': error}), 406
         elif auth_db.get_user_by_cpf is None:
-            return jsonify({'message': 'Esta pessoa nao esta cadastrada no sistema ainda. Favor realizar o cadastro'}), 406
+            return jsonify({'message': '''Esta pessoa nao esta cadastrada no sistema ainda.
+                            Favor realizar o cadastro'''}), 406
     
         purchase_db.insert_new_purchase(code, value, dth_purchase, cpf)
         
@@ -57,7 +58,8 @@ def get_accumulated_cashback(current_user):
      try:
          cpf = auth_model.clean_cpf(request.args.get('cpf'))
          
-         response = requests.get('https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1/cashback?cpf={}'.format(cpf),
+         response = requests.get('https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1/cashback?cpf={}'
+                                    .format(cpf),
                                  headers = {'token': '&#39;ZXPURQOARHiMc6Y0flhRC1LVlZQVFRnm&#39;'})
     
          response.raise_for_status()

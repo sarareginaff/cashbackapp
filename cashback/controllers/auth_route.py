@@ -22,13 +22,15 @@ def register():
         if error != '':
             return jsonify({'message': error}), 406
         elif auth_db.get_user_by_cpf(cpf) is not None:
-            return jsonify({'message': 'Ja existe um usuario cadastrado com o CPF {}'.format(cpf)}), 409
+            return jsonify({'message': 'Ja existe um usuario cadastrado com o CPF {}'
+                            .format(cpf)}), 409
     
         auth_db.insert_new_user(full_name, cpf, email, password)
         
         return jsonify({'message': 'Usuario cadastrado com sucesso'}), 200
     except Exception as err:
-        return jsonify({'message': 'Nao foi possivel registrar o usuario - {}'.format(err)}), 500
+        return jsonify({'message': 'Nao foi possivel registrar o usuario - {}'
+                        .format(err)}), 500
     
 
 @bp.route('/login', methods=['POST'])
@@ -46,7 +48,8 @@ def login():
         return jsonify({'message': 'Usuario autenticado com sucesso!', 
                         'token': token.decode('UTF-8'), 'exp': expire_date}), 200
     except Exception as err:
-        return jsonify({'message': 'Erro inesperado ao autenticar usuario - {}'.format(err)}), 500
+        return jsonify({'message': 'Erro inesperado ao autenticar usuario - {}'
+                        .format(err)}), 500
 
 
 @bp.route('/logout', methods=['GET'])
@@ -62,6 +65,7 @@ def logout(current_user):
         
         return jsonify({'message': 'Usuario fez o logout com sucesso!'}), 200
     except Exception as err:
-        return jsonify({'message': 'Erro inesperado ao fazer logout - {}'.format(err)}), 500
+        return jsonify({'message': 'Erro inesperado ao fazer logout - {}'
+                        .format(err)}), 500
 
 

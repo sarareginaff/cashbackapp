@@ -15,7 +15,8 @@ def token_required(f):
         else:
             not_allowed_tokens = auth_db.get_not_allowed_tokens()
             if not_allowed_tokens and token in not_allowed_tokens:
-                return jsonify({'message': 'Token nao esta habilitado. Usuario foi deslogado'}), 401
+                return jsonify({'message': '''Token nao esta habilitado. 
+                                            Usuario foi deslogado'''}), 401
         try:
             data = auth_model.decode_token(token)
             
