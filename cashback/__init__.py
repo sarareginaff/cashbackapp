@@ -21,10 +21,10 @@ def create_app(test_config=None):
     from .db import db
     db.init_app(app)
     
-    from .views import auth_route
+    from .controllers import auth_route
     app.register_blueprint(auth_route.bp)
     
-    from .views import purchase_route
+    from .controllers import purchase_route
     app.register_blueprint(purchase_route.bp)
     
     return app
