@@ -11,6 +11,24 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=['POST'])
 def register():
+    """
+        Register new user.
+
+        :Parameters: 
+            - full_name (string): Full name of new user
+            - cpf (string): CPF of new user. Can have dots and hifens
+            - email (string): email of new user. It must have a @
+            - password (string): password of new user
+    
+        :Headers: 
+            - Content-Type: application/json
+        
+        :Returns:
+            - message (string): Success if user is registered. Errors explanation if not
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     try:
         full_name = request.json['full_name']
         cpf = auth_model.clean_cpf(request.json['cpf'])
@@ -35,6 +53,24 @@ def register():
 
 @bp.route('/login', methods=['POST'])
 def login():
+    """
+        Login user.
+
+        :Parameters: 
+            - cpf (string): CPF of user. Can have dots and hifens
+            - password (string): password of user
+        
+        :Headers: 
+            - Content-Type: application/json
+
+        :Returns: 
+            - message (string): Success if user is registered. Errors explanation if not
+            - token (string): Token of user and its expire date
+            - exp (string): Token expire date
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     try:
         cpf = auth_model.clean_cpf(request.json['cpf'])
         password = request.json['password']
@@ -55,6 +91,19 @@ def login():
 @bp.route('/logout', methods=['GET'])
 @helper.token_required
 def logout(current_user):
+    """
+        Logout user.
+
+        :Headers: 
+            - Authorization (string): token of user.
+            - Content-Type: application/json
+        
+        :Returns: 
+            - message (string): Success if user is registered. Errors explanation if not
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     try:
         token = request.headers.get('Authorization')
         

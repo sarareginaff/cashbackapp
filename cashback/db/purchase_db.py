@@ -3,6 +3,18 @@ from cashback.models import purchase_model
 
 
 def insert_new_purchase(code, value, dth_purchase, cpf):
+    """
+        Insert new purchase.
+
+        :Parameters: 
+            - code (string): purchase code
+            - value (number): purchase value
+            - dth_purchase (string): date of purchase in format %Y-%m-%d %H:%M:%S
+            - cpf (string): CPF of user responsible for purchase.
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     db = get_db()
     
     db.execute(
@@ -29,6 +41,15 @@ def insert_new_purchase(code, value, dth_purchase, cpf):
     
 
 def get_all_purchases():
+    """
+        Gets all purchases.
+
+        :Returns: 
+            - purchases (list): list of purchases with its code, value, dth_purchase, cpf and status
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     db = get_db()
     
     return db.execute(

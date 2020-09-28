@@ -6,6 +6,19 @@ from cashback.db import auth_db
 from cashback.models import auth_model
     
 def token_required(f):
+    """
+        Create decorator to request token.
+
+        :Headers: 
+            - Content-Type: application/json
+            - Authorization (string): token of user.
+            
+        :Returns:
+            - current_user: Current user data
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     @wraps(f)
     def decorated(*args, **kwargs):
         token = request.headers.get('Authorization')

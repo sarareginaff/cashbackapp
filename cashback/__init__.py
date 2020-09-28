@@ -1,10 +1,18 @@
 import os
 from flask import Flask
 
-#Application factory function
-def create_app(test_config=None):
+def create_app():
+    """
+        Create cashback flask app
+
+        :Returns: 
+            - app (flask instance): cashback flask app
+
+        :author: sarareginaff       
+        :creation: Sep/2020
+    """
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True) #creates the Flask instance
+    app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(__name__)
     app.config.from_pyfile('../cashback/config.py')
     
@@ -12,15 +20,17 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'cashback.sqlite'),
     )
     
-    # ensure the instance folder exists
+    # create instance folder exists if it does not exists
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
 
+    # init db
     from .db import db
     db.init_app(app)
     
+    # include controllers
     from .controllers import auth_route
     app.register_blueprint(auth_route.bp)
     
